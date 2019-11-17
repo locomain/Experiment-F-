@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="NN\ILayer.fs" />
+    <Compile Include="NN\INeuron.fs" />
     <Compile Include="NN\Connection.fs" />
     <Compile Include="NN\Neuron.fs" />
     <Compile Include="NN\Layer.fs" />

@@ -12,5 +12,8 @@ type Neuron()=
     member this.feedForward() =
         printf("todo")
     
-    member this.propagate(layer) = 
+    member this.propagate(layer: Layer) = 
         printf("todo")
+
+    member this.update(learnRate:double) =
+        printf("")

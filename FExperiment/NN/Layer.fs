@@ -1,13 +1,13 @@
 ﻿namespace Layer
 
+open Connection            
 open Neuron
-open Connection
 
 [<AllowNullLiteralAttribute>]
 type public Layer(amountOfNeurons) as this = 
     member val neurons: List<Neuron> = this.generateNeurons(amountOfNeurons);
-    member val rightConnectionLayer: Layer = new Layer(0) with get, set
-    member val leftConnectionLayer: Layer = new Layer(0) with get, set
+    member val rightConnectionLayer: Layer = null with get, set
+    member val leftConnectionLayer: Layer = null with get, set
     
     member this.generateNeurons(amount): List<Neuron>  = 
         [ for i in 0 .. amount -> new Neuron() ]
@@ -31,10 +31,13 @@ type public Layer(amountOfNeurons) as this =
     member this.propagate() =
         for neuron in this.neurons do
             do neuron.propagate(this)
-        if this.leftConnectionLayer = new Layer(0) then
+        if this.leftConnectionLayer <> null then
             do this.leftConnectionLayer.propagate()
+    
+    member this.update(learnRate: double)=
+        for neuron in this.neurons do
+            do neuron.update(learnRate)
+        if this.rightConnectionLayer <> null then
+            do this.rightConnectionLayer.update(learnRate)
                
-                
-
-
 
