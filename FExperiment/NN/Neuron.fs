@@ -1,6 +1,7 @@
 ﻿module Neuron
 
 open Connection
+open ILayer
 
 type Neuron()= 
     member this.addOutGoingConnection(connection: Connection) =
@@ -12,7 +13,7 @@ type Neuron()=
     member this.feedForward() =
         printf("todo")
     
-    member this.propagate(layer: Layer) = 
+    member this.propagate(layer: ILayer) = 
         printf("todo")
 
     member this.update(learnRate:double) =
