@@ -5,7 +5,7 @@ open ILayer
 open MathHelper
 
 type Neuron() = 
-    member val bias:  double = 0.0 with get, set //TODO random
+    member val bias:  double = MathHelper.random() with get, set 
     member val error: double = 0.0 with get, set
     member val delta: double = 0.0 with get, set
     member val value: double = 0.0 with get, set
