@@ -2,6 +2,7 @@
 
 open Connection
 open ILayer
+open MathHelper
 
 type Neuron() = 
     member val bias:  double = 0.0 with get, set //TODO random
@@ -33,13 +34,14 @@ type Neuron() =
             this.value <- sum
 
     member this.activate()=
-        this.value <- 0.0 //TODO sigmoid
+        this.value <- MathHelper.sigmoid(this.value)
 
     member this.propagate(layer: ILayer<Neuron>) = 
-        printf("todo")
+        do this.calculateError(layer)
 
     member this.update(learnRate:double) =
-        printf("")
+        for connection in this.inputConnections do
+            connection.weight <- connection.weight + this.delta * connection.value * learnRate
     
     member this.calculateError(layer:ILayer<Neuron>) =
         let mutable error = 0.0
@@ -48,3 +50,5 @@ type Neuron() =
                 for outputConnection in this.outputConnections do
                     if connection = outputConnection then
                         error <- error + connection.weight * neuron.delta
+        this.error <- error
+        this.delta <- this.value * (1.0 - this.value) * this.error
