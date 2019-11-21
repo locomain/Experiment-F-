@@ -20,7 +20,7 @@ let main argv =
         new TrainingSet([1.0;1.0],[0.0])
     ]
 
-    network.train(trainingSets,1,1)
+    network.train(trainingSets,2147483647,0.0002)
     
 
     Console.WriteLine("harroo wuuurld");

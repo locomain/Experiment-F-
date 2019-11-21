@@ -42,14 +42,20 @@ type Network() =
                 let nextLayer = this.hiddenLayers.[i+1];
                 (layer:>ILayer<Neuron>).connectTo(nextLayer);
 
-    //TODO add trainingsetobject
-    member this.train(data: List<TrainingSet>,iterations,until) =
-        for i = 0 to iterations-1 do
+    member this.train(data: List<TrainingSet>, iterations:int, until:float) =
+        let trainingError = 1000.0
+        let mutable i = 0
+
+        Console.WriteLine("training trainingError = {0}, until = {1}, i={2}, iterations={3} condition = {4}",trainingError,until,i,iterations,(trainingError<until || i=iterations-1))
+        while (trainingError>until || i<iterations-1) do
+            i <- i+1
+            Console.WriteLine("here {0}",i)
             let mutable errors = [];
             for j = 0 to (data.Length-1) do 
                 let set = data.[j]
                 this.outputLayer.setTargets(set.output)
                 this.run(set.input)
+                this.propagate()
                 this.update()
                 if i % 1000 = 0 then do Console.WriteLine("Network: error = {0} on iteration {1} for set {2}",this.outputLayer.error,i,j)//TODO
                 set.error <- this.outputLayer.error
@@ -58,6 +64,9 @@ type Network() =
             let trainingError = 0//TODO collectiveError(errors)
             if i % 1000=0 then do Console.WriteLine("\nNetwork: error = {0}",trainingError)
         Console.WriteLine("\n\nNETWORK: DONE TRAINING!");
+
+    member this.propagate()=
+        do this.outputLayer.propagate();
 
     member this.update()=
         (this.inputLayer:>ILayer<Neuron>).update(this.learnRate)
