@@ -49,8 +49,11 @@ type Network() =
             for j = 0 to (data.Length-1) do 
                 let set = data.[j]
                 this.outputLayer.setTargets(set.output)
-                //this.run(set.input, false)
+                this.run(set.input)
                 //this.update()
                 if i % 1000 = 0 then do Console.WriteLine("1000 iteraties voorbij")//TODO
         Console.WriteLine("NETWORK: DONE TRAINING!");
     
+    member this.run(data: List<double>) =
+        this.inputLayer.set(data)
+        (this.inputLayer:>ILayer<Neuron>).feedForward()

@@ -18,9 +18,10 @@ type public Layer(amountOfNeurons) =
         member val neurons: List<Neuron> = [] with get, set
         
         member this.connectTo(layer: ILayer<Neuron>)= //TODO check assignment
-            let self = (this:>ILayer<Neuron>);
+            let self = (this:>ILayer<Neuron>);         
             self.rightConnectionLayer <- layer
             layer.leftConnectionLayer <- this
+            Console.WriteLine("connected layers")
             for index = 0 to (self.neurons.Length-1) do
                 let neuron = self.neurons.[index]
                 for rightIndex = 0 to (layer.neurons.Length-1) do 
@@ -33,7 +34,8 @@ type public Layer(amountOfNeurons) =
             let self = (this:>ILayer<Neuron>);
             for neuron in self.neurons do
                 do neuron.feedForward()
-            self.rightConnectionLayer.feedForward()
+            if self.rightConnectionLayer <> null then
+                do self.rightConnectionLayer.feedForward()
 
         member this.propagate() =
             let self = (this:>ILayer<Neuron>);
