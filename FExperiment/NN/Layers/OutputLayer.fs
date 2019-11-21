@@ -14,7 +14,7 @@ type OutputLayer() =
         this.calculateError()
         (this:>ILayer<Neuron>).leftConnectionLayer.propagate()
 
-    member this.setTargets(targets: List<double>) = 
+    member this.setTargets(targets: List<float>) = 
         let self = (this:>ILayer<Neuron>)
         for i = 0 to (targets.Length-1) do
             self.neurons.[i].target <- targets.[i]

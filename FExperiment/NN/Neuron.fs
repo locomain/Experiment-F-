@@ -5,11 +5,11 @@ open ILayer
 open MathHelper
 
 type Neuron() = 
-    member val bias:  double = MathHelper.random() with get, set 
-    member val error: double = 0.0 with get, set
-    member val delta: double = 0.0 with get, set
-    member val value: double = 0.0 with get, set
-    member val target: double = 0.0 with get, set
+    member val bias:  float = MathHelper.random() with get, set 
+    member val error: float = 0.0 with get, set
+    member val delta: float = 0.0 with get, set
+    member val value: float = 0.0 with get, set
+    member val target: float = 0.0 with get, set
 
     member val inputConnections: List<Connection> = [] with get, set
     member val outputConnections: List<Connection> = [] with get, set
@@ -40,11 +40,11 @@ type Neuron() =
     member this.propagate(layer: ILayer<Neuron>) = 
         do this.calculateError(layer) |> ignore
 
-    member this.update(learnRate:double) =
+    member this.update(learnRate:float) =
         for connection in this.inputConnections do
             connection.weight <- connection.weight + this.delta * connection.value * learnRate
     
-    member this.calculateError(layer:ILayer<Neuron>): double = //TODO double check
+    member this.calculateError(layer:ILayer<Neuron>): float = //TODO double check
         let mutable error = 0.0
         if layer <> null then 
             for neuron in layer.rightConnectionLayer.neurons do

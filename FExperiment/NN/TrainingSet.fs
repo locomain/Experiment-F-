@@ -1,6 +1,6 @@
 ﻿module TrainingSet
 
-type TrainingSet(input:List<double>, output:List<double>)=
-    member val input: List<double> = input
-    member val output: List<double> = output
-    member val error: double = 0.0 with get,set
+type TrainingSet(input:List<float>, output:List<float>)=
+    member val input: List<float> = input
+    member val output: List<float> = output
+    member val error: float = 0.0 with get,set

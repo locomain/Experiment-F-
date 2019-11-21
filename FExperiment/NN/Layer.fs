@@ -44,7 +44,7 @@ type public Layer(amountOfNeurons) =
             if self.leftConnectionLayer <> null then
                 do self.leftConnectionLayer.propagate()
         
-        member this.update(learnRate: double)=
+        member this.update(learnRate: float)=
             let self = (this:>ILayer<Neuron>);
             for neuron in self.neurons do
                 do neuron.update(learnRate)
