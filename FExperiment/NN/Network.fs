@@ -68,7 +68,7 @@ type Network() =
             for j = 0 to (data.Length-1) do 
                 let set = data.[j]
                 this.outputLayer.setTargets(set.output)
-                this.run(set.input)
+                this.run(set.input) |> ignore
                 this.propagate()
                 this.update()
                 if i % 1000 = 0 then do Console.WriteLine("Network: error = {0} on iteration {1} for set {2}",this.outputLayer.error,i,j)//TODO

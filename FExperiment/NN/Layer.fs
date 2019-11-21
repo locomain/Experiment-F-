@@ -11,7 +11,7 @@ type public Layer(amountOfNeurons) =
 
         member this.generateNeurons(amount: int): unit = 
             let self = (this:>ILayer<Neuron>)
-            self.neurons <- [ for i in 0 .. amount -> new Neuron() ]
+            self.neurons <- [ for i in 0 .. amount-1 -> new Neuron() ]
 
         member val rightConnectionLayer: ILayer<Neuron> = null with get, set
         member val leftConnectionLayer: ILayer<Neuron> = null with get, set
