@@ -15,7 +15,6 @@
     <Compile Include="NN\Layers\OutputLayer.fs" />
     <Compile Include="NN\Layers\InputLayer.fs" />
     <Compile Include="NN\Network.fs" />
-    <Compile Include="NN\NN.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

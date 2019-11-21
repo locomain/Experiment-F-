@@ -9,7 +9,7 @@ open TrainingSet
 open System
 
 type Network() = 
-    member val errors = []//TODO
+    member val errors = [] with get,set
     member val inputLayer: InputLayer = null with get, set
     member val hiddenLayers: List<Layer> = [] with get,set
     member val outputLayer: OutputLayer = null with get, set
@@ -45,15 +45,23 @@ type Network() =
     //TODO add trainingsetobject
     member this.train(data: List<TrainingSet>,iterations,until) =
         for i = 0 to iterations-1 do
-            let errors = [];
+            let mutable errors = [];
             for j = 0 to (data.Length-1) do 
                 let set = data.[j]
                 this.outputLayer.setTargets(set.output)
                 this.run(set.input)
-                //this.update()
-                if i % 1000 = 0 then do Console.WriteLine("1000 iteraties voorbij")//TODO
-        Console.WriteLine("NETWORK: DONE TRAINING!");
-    
+                this.update()
+                if i % 1000 = 0 then do Console.WriteLine("Network: error = {0} on iteration {1} for set {2}",this.outputLayer.error,i,j)//TODO
+                set.error <- this.outputLayer.error
+                errors <- errors @ [set.error]
+                Console.WriteLine("set error = {0}",set.error);
+            let trainingError = 0//TODO collectiveError(errors)
+            if i % 1000=0 then do Console.WriteLine("\nNetwork: error = {0}",trainingError)
+        Console.WriteLine("\n\nNETWORK: DONE TRAINING!");
+
+    member this.update()=
+        (this.inputLayer:>ILayer<Neuron>).update(this.learnRate)
+        
     member this.run(data: List<double>) =
         this.inputLayer.set(data)
         (this.inputLayer:>ILayer<Neuron>).feedForward()
