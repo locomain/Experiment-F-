@@ -23,5 +23,5 @@ type OutputLayer() =
         let mutable error = 0.0
         let self = (this:>ILayer<Neuron>)
         for neuron in self.neurons do 
-            error <- error+neuron.calculateError(null);
+            error <- error+neuron.calculateError(null); //TODO check neuron / output neuron
         this.error <- error;
