@@ -16,7 +16,7 @@ let main argv =
     network.addOutputLayer(1)
     network.build()
 
-    //Console.WriteLine((network.outputLayer:>ILayer<Neuron>).neurons.Length)
+    //Console.WriteLine((network.outputLayer:>ILayer<Neuron>).leftConnectionLayer.neurons.Length)
 
     let trainingSets: List<TrainingSet> = [
         new TrainingSet([0.0;0.0],[0.0])

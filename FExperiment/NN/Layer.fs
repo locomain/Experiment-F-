@@ -9,19 +9,18 @@ open System
 type public Layer(amountOfNeurons) = 
     interface ILayer<Neuron> with
 
-        member this.generateNeurons(amount: int): unit = 
-            let self = (this:>ILayer<Neuron>)
-            self.neurons <- [ for i in 0 .. amount-1 -> new Neuron() ]
-
         member val rightConnectionLayer: ILayer<Neuron> = null with get, set
         member val leftConnectionLayer: ILayer<Neuron> = null with get, set
         member val neurons: List<Neuron> = [] with get, set
+
+        member this.generateNeurons(amount: int): unit = 
+            let self = (this:>ILayer<Neuron>)
+            self.neurons <- [ for i in 0 .. amount-1 -> new Neuron() ]
         
-        member this.connectTo(layer: ILayer<Neuron>)= //TODO check assignment
+        member this.connectTo(layer: ILayer<Neuron>)=
             let self = (this:>ILayer<Neuron>);         
             self.rightConnectionLayer <- layer
             layer.leftConnectionLayer <- this
-            Console.WriteLine("connected layers")
             for index = 0 to (self.neurons.Length-1) do
                 let neuron = self.neurons.[index]
                 for rightIndex = 0 to (layer.neurons.Length-1) do 

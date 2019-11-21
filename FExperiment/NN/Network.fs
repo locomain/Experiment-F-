@@ -9,7 +9,6 @@ open TrainingSet
 open System
 
 type Network() = 
-    member val errors = [] with get,set
     member val inputLayer: InputLayer = null with get, set
     member val hiddenLayers: List<Layer> = [] with get,set
     member val outputLayer: OutputLayer = null with get, set
