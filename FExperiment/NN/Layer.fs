@@ -23,10 +23,7 @@ type public Layer(amountOfNeurons) =
             layer.leftConnectionLayer <- this
             for index = 0 to (self.neurons.Length-1) do
                 let neuron = self.neurons.[index]
-                Console.WriteLine("list is {0}",layer.neurons.Length)
-                
                 for rightIndex = 0 to (layer.neurons.Length-1) do 
-                    Console.WriteLine("index {0}", rightIndex)
                     let rightNeuron = layer.neurons.[rightIndex]
                     let connection = new Connection()
                     do neuron.addOutGoingConnection(connection) |> ignore
