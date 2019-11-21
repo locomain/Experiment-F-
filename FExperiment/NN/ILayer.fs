@@ -9,4 +9,5 @@ type ILayer<'T> =
     abstract member feedForward: unit -> unit
     abstract member propagate: unit -> unit
     abstract member update: double -> unit
-    abstract member connectTo: ILayer<'T> -> List<double> -> unit
+    abstract member connectTo: ILayer<'T> -> unit
+    abstract member generateNeurons: int -> unit

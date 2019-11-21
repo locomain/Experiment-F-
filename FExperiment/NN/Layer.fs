@@ -3,30 +3,34 @@
 open Connection            
 open Neuron
 open ILayer
+open System
 
 [<AllowNullLiteralAttribute>]
-type public Layer(amountOfNeurons) as this = 
-    
-    member this.generateNeurons(amount): List<Neuron>  = 
-        [ for i in 0 .. amount -> new Neuron() ]
-
+type public Layer(amountOfNeurons) = 
     interface ILayer<Neuron> with
+
+        member this.generateNeurons(amount: int): unit = 
+            let self = (this:>ILayer<Neuron>)
+            self.neurons <- [ for i in 0 .. amount -> new Neuron() ]
 
         member val rightConnectionLayer: ILayer<Neuron> = null with get, set
         member val leftConnectionLayer: ILayer<Neuron> = null with get, set
-        member val neurons: List<Neuron> = this.generateNeurons(amountOfNeurons) with get, set
+        member val neurons: List<Neuron> = [] with get, set
         
-        member this.connectTo(layer: ILayer<Neuron>) ( indexedWeights: List<double>)= //TODO check assignment
+        member this.connectTo(layer: ILayer<Neuron>)= //TODO check assignment
             let self = (this:>ILayer<Neuron>);
             self.rightConnectionLayer <- layer
             layer.leftConnectionLayer <- this
-            for neuron in self.neurons do
-                let index = List.findIndex(fun n->n = neuron) self.neurons;
-                for rightNeuron in layer.neurons do 
-                    let rightIndex = List.findIndex(fun n->n = neuron) layer.neurons
-                    let connection = if indexedWeights.Length<1 then new Connection() else new Connection()
-                    neuron.addOutGoingConnection(connection)
-                    rightNeuron.addIncomingConnection(connection);
+            for index = 0 to (self.neurons.Length-1) do
+                let neuron = self.neurons.[index]
+                Console.WriteLine("list is {0}",layer.neurons.Length)
+                
+                for rightIndex = 0 to (layer.neurons.Length-1) do 
+                    Console.WriteLine("index {0}", rightIndex)
+                    let rightNeuron = layer.neurons.[rightIndex]
+                    let connection = new Connection()
+                    do neuron.addOutGoingConnection(connection) |> ignore
+                    do rightNeuron.addIncomingConnection(connection) |> ignore
 
         member this.feedForward() =
             let self = (this:>ILayer<Neuron>);

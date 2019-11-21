@@ -5,13 +5,14 @@ open Network
 
 [<EntryPoint>]
 let main argv =
-    //printfn "Hello World from F#!"
-    //let network = new Network(2,10,10,1)
-    let rnd = Random()
-    
-    Console.WriteLine("number is = {0}",rnd.NextDouble() );
-    Console.WriteLine("number is = {0}",rnd.NextDouble() );
-    Console.WriteLine("number is = {0}",rnd.NextDouble() );
-    Console.WriteLine("number is = {0}",rnd.NextDouble() );
+    let network = new Network()
+    network.addInputLayer(2)
+    network.addHiddenLayer(4) |> ignore
+    network.addHiddenLayer(1) |> ignore
+    network.addOutputLayer(1)
+
+    network.build()
+
+    Console.WriteLine("harroo wuuurld");
     //printfn(nmb)
     0 

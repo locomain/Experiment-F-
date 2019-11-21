@@ -11,9 +11,16 @@
     <Compile Include="NN\Connection.fs" />
     <Compile Include="NN\Neuron.fs" />
     <Compile Include="NN\Layer.fs" />
+    <Compile Include="NN\Layers\OutputLayer.fs" />
+    <Compile Include="NN\Layers\InputLayer.fs" />
     <Compile Include="NN\Network.fs" />
     <Compile Include="NN\NN.fs" />
     <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="NN\Interfaces\" />
+    <Folder Include="NN\Core\" />
   </ItemGroup>
 
 </Project>
