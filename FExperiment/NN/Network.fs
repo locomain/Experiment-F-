@@ -94,6 +94,9 @@ type Network() =
     ///
     /// Runs a network query
     ///
-    member this.run(data: List<float>) =
+    member this.run(data: List<float>): List<float> =
         this.inputLayer.set(data)
         (this.inputLayer:>ILayer<Neuron>).feedForward()
+        let values = (this.outputLayer:>ILayer<Neuron>).neurons |> List.map(fun neuron -> neuron.value )  
+        List.sort values
+        
