@@ -12,7 +12,7 @@ type Network() =
     member val inputLayer: InputLayer = null with get, set
     member val hiddenLayers: List<Layer> = [] with get,set
     member val outputLayer: OutputLayer = null with get, set
-    member val learnRate = 0.3;
+    member val learnRate = 0.3 with get,set
 
     ///
     /// Adds a input layer to the network
@@ -37,6 +37,12 @@ type Network() =
         let layer = new Layer()
         do (layer:> ILayer<Neuron>).generateNeurons(amountOfNeurons)
         this.hiddenLayers <- this.hiddenLayers @ [layer]
+    
+    ///
+    /// Sets the learnrate of the network
+    ///
+    member this.setLearnRate(rate: float)=
+        this.learnRate <- rate
 
     ///
     /// Builds the network topology
@@ -60,9 +66,8 @@ type Network() =
         let mutable i = 0
 
         Console.WriteLine("training trainingError = {0}, until = {1}, i={2}, iterations={3} condition = {4}",trainingError,until,i,iterations,(trainingError<until || i=iterations-1))
-        while (trainingError>until && i<iterations-1) do
+        while (trainingError>until && i<iterations) do 
             i <- i+1
-            Console.WriteLine("here {0}",i)
             let mutable errors = [];
             for j = 0 to (data.Length-1) do 
                 let set = data.[j]

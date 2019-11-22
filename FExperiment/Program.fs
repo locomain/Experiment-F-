@@ -14,6 +14,7 @@ let main argv =
     network.addHiddenLayer(4) |> ignore
     network.addHiddenLayer(1) |> ignore
     network.addOutputLayer(1)
+    network.setLearnRate(0.3)
     network.build()
 
     //Console.WriteLine((network.outputLayer:>ILayer<Neuron>).leftConnectionLayer.neurons.Length)
@@ -25,7 +26,7 @@ let main argv =
         new TrainingSet([1.0;1.0],[0.0])
     ]
     //2147483647
-    network.train(trainingSets,2147483647,0.0002)
+    network.train(trainingSets,1,0.0002)
 
     Console.WriteLine("1,0->1 = {0}",network.run([1.0;0.0]));
     Console.WriteLine("1,1->0 = {0}",network.run([1.0;1.0]));

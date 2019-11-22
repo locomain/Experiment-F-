@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="NN\TrainingSet.fs" />
-    <Compile Include="NN\MathHelper.fs" />
-    <Compile Include="NN\ILayer.fs" />
+    <Compile Include="NN\Training\TrainingSet.fs" />
+    <Compile Include="NN\Utils\MathHelper.fs" />
+    <Compile Include="NN\Interfaces\ILayer.fs" />
     <Compile Include="NN\Connection.fs" />
     <Compile Include="NN\Neuron.fs" />
     <Compile Include="NN\Layer.fs" />
@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="NN\Interfaces\" />
     <Folder Include="NN\Core\" />
   </ItemGroup>
 
