@@ -1,5 +1,4 @@
 language: fsharp
 solution: FExperiment/FExperiment.sln
 script:
-  - msbuild /p:Configuration=Release FExperiment/FExperiment.sln
-  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./FExperiment/bin/Release/FExperiment.exe
+  - dotnet run
