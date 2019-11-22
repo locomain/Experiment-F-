@@ -14,13 +14,13 @@ type public Layer(amountOfNeurons) =
         member val neurons: List<Neuron> = [] with get, set
 
         ///
-        ///
+        /// Generates neurons
         ///
         member this.generateNeurons(amount: int): unit = 
             let self = (this:>ILayer<Neuron>)
             self.neurons <- [ for i in 0 .. amount-1 -> new Neuron() ]
         ///
-        ///
+        /// Connects a layer to another layer
         ///
         member this.connectTo(layer: ILayer<Neuron>)=
             let self = (this:>ILayer<Neuron>);         
@@ -34,7 +34,7 @@ type public Layer(amountOfNeurons) =
                     do neuron.addOutGoingConnection(connection) |> ignore
                     do rightNeuron.addIncomingConnection(connection) |> ignore
         ///
-        ///
+        /// Feeds the data forward
         ///
         member this.feedForward() =
             let self = (this:>ILayer<Neuron>);
@@ -44,7 +44,7 @@ type public Layer(amountOfNeurons) =
                 do self.rightConnectionLayer.feedForward()
 
         ///
-        ///
+        /// Propagates the network
         ///
         member this.propagate() =
             let self = (this:>ILayer<Neuron>);
@@ -53,7 +53,7 @@ type public Layer(amountOfNeurons) =
             if self.leftConnectionLayer <> null then
                 do self.leftConnectionLayer.propagate()
         ///
-        ///
+        /// Updates the network
         ///
         member this.update(learnRate: float)=
             let self = (this:>ILayer<Neuron>);

@@ -24,12 +24,11 @@ let main argv =
         new TrainingSet([0.0;1.0],[1.0])
         new TrainingSet([1.0;1.0],[0.0])
     ]
-    //2147483647
     network.train(trainingSets,100000,0.0002)
 
     Console.WriteLine("1,0->1 = {0}", Math.Round(network.run([1.0;0.0]).[0]));
     Console.WriteLine("1,1->0 = {0}", Math.Round(network.run([1.0;1.0]).[0]));
     Console.WriteLine("0,1->1 = {0}", Math.Round(network.run([0.0;1.0]).[0]));
     Console.WriteLine("0,0->0 = {0}", Math.Round(network.run([0.0;0.0]).[0]));
-    
+ 
     0 

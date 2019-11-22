@@ -66,7 +66,6 @@ type Network() =
         let mutable trainingError = 100.0
         let mutable i = 0
 
-        //Console.WriteLine("training trainingError = {0}, until = {1}, i={2}, iterations={3} condition = {4}",trainingError,until,i,iterations,(trainingError<until || i=iterations-1))
         while (i<iterations) do 
             i <- i+1
             let mutable errors = [];
