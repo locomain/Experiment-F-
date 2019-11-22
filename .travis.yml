@@ -1,4 +1,6 @@
 language: fsharp
 solution: FExperiment/FExperiment.sln
+mono: none
+dotnet: 3.0.100
 script:
   - dotnet run
