@@ -42,6 +42,7 @@ type public Layer(amountOfNeurons) =
                 do neuron.feedForward()
             if self.rightConnectionLayer <> null then
                 do self.rightConnectionLayer.feedForward()
+
         ///
         ///
         ///

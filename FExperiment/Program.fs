@@ -27,7 +27,7 @@ let main argv =
         new TrainingSet([1.0;1.0],[0.0])
     ]
     //2147483647
-    network.train(trainingSets,8000,0.0002)
+    network.train(trainingSets,10000,0.0002)
 
     Console.WriteLine("1,0->1 = {0}",network.run([1.0;0.0]));
     Console.WriteLine("1,1->0 = {0}",network.run([1.0;1.0]));
