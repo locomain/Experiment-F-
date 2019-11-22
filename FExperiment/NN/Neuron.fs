@@ -81,6 +81,5 @@ type Neuron() =
             this.error <- error
         else 
             this.error <- this.target-this.value//plain error
-            Console.WriteLine("output neuron error = {0}",this.error)
             this.delta <- this.value * (1.0 - this.value) * this.error
         this.error

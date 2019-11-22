@@ -24,11 +24,8 @@ type OutputLayer() =
             self.neurons.[i].target <- targets.[i]
             
     member this.calculateError()=
-        Console.WriteLine("calculating output error")
         let mutable error = 0.0
         let self = (this:>ILayer<Neuron>)
         for neuron in self.neurons do 
             error <- error+neuron.calculateError(null); //TODO check neuron / output neuron
-            Console.WriteLine(error)
-        Console.WriteLine(error)
         this.error <- error;

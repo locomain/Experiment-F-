@@ -3,7 +3,7 @@
 open System
 
 type MathHelper()=
-    static member E: float = 2.71828;
+    static member E: float = 2.718281828459045;
 
     static member sigmoid(value): float =
         1.0/(1.0+(MathHelper.E**(0.0-value)))

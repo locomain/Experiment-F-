@@ -3,12 +3,13 @@
 open System
 open Network
 open TrainingSet
-
+open MathHelper
 open Neuron
 open ILayer
 
 [<EntryPoint>]
 let main argv =
+
     let network = new Network()
     network.addInputLayer(2)
     network.addHiddenLayer(4) |> ignore
@@ -26,7 +27,7 @@ let main argv =
         new TrainingSet([1.0;1.0],[0.0])
     ]
     //2147483647
-    network.train(trainingSets,1,0.0002)
+    network.train(trainingSets,8000,0.0002)
 
     Console.WriteLine("1,0->1 = {0}",network.run([1.0;0.0]));
     Console.WriteLine("1,1->0 = {0}",network.run([1.0;1.0]));

@@ -6,6 +6,7 @@ open Layer
 open InputLayer
 open OutputLayer
 open TrainingSet
+open MathHelper
 open System
 
 type Network() = 
@@ -65,7 +66,7 @@ type Network() =
         let trainingError = 1000.0
         let mutable i = 0
 
-        Console.WriteLine("training trainingError = {0}, until = {1}, i={2}, iterations={3} condition = {4}",trainingError,until,i,iterations,(trainingError<until || i=iterations-1))
+        //Console.WriteLine("training trainingError = {0}, until = {1}, i={2}, iterations={3} condition = {4}",trainingError,until,i,iterations,(trainingError<until || i=iterations-1))
         while (trainingError>until && i<iterations) do 
             i <- i+1
             let mutable errors = [];
@@ -78,8 +79,7 @@ type Network() =
                 if i % 1000 = 0 then do Console.WriteLine("Network: error = {0} on iteration {1} for set {2}",this.outputLayer.error,i,j)//TODO
                 set.error <- this.outputLayer.error
                 errors <- errors @ [set.error]
-                Console.WriteLine("set error = {0}",set.error);
-            let trainingError = 0//TODO collectiveError(errors)
+            let trainingError = MathHelper.collectiveError(errors)
             if i % 1000=0 then do Console.WriteLine("\nNetwork: error = {0}",trainingError)
         Console.WriteLine("\n\nNETWORK: DONE TRAINING!");
 
