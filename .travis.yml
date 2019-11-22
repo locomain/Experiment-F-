@@ -3,4 +3,4 @@ solution: FExperiment/FExperiment.sln
 mono: none
 dotnet: 3.0.100
 script:
-  - dotnet run -- FExperiment/FExperiment.sln
+  - dotnet run --project FExperiment/FExperiment.sln
