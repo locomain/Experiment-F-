@@ -16,9 +16,6 @@ type OutputLayer() =
     ///
     member this.propagate()=
         this.calculateError()
-        //let self = (this:>ILayer<Neuron>);
-        //for neuron in self.neurons do
-          //  do neuron.propagate(null)
         (this:>ILayer<Neuron>).leftConnectionLayer.propagate()
 
     ///

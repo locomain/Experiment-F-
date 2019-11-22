@@ -65,7 +65,7 @@ type Neuron() =
     member this.update(learnRate:float) =
         for connection in this.inputConnections do
             connection.weight <- connection.weight + this.delta * connection.value * learnRate
-        this.bias <- this.bias+learnRate*this.delta
+        this.bias <- this.bias+(learnRate*this.delta)
     
     ///
     /// Calculates the neurons error
@@ -81,5 +81,5 @@ type Neuron() =
             this.error <- error
         else 
             this.error <- this.target-this.value//plain error
-            this.delta <- this.value * (1.0 - this.value) * this.error
+        this.delta <- this.value * (1.0-this.value) * this.error
         this.error

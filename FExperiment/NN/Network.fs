@@ -63,11 +63,11 @@ type Network() =
     /// Trains the network
     ///
     member this.train(data: List<TrainingSet>, iterations:int, until:float) =
-        let trainingError = 1000.0
+        let mutable trainingError = 100.0
         let mutable i = 0
 
         //Console.WriteLine("training trainingError = {0}, until = {1}, i={2}, iterations={3} condition = {4}",trainingError,until,i,iterations,(trainingError<until || i=iterations-1))
-        while (trainingError>until && i<iterations) do 
+        while (i<iterations) do 
             i <- i+1
             let mutable errors = [];
             for j = 0 to (data.Length-1) do 
@@ -79,9 +79,8 @@ type Network() =
                 if i % 1000 = 0 then do Console.WriteLine("Network: error = {0} on iteration {1} for set {2}",this.outputLayer.error,i,j)//TODO
                 set.error <- this.outputLayer.error
                 errors <- errors @ [set.error]
-            let trainingError = MathHelper.collectiveError(errors)
-            if i % 1000=0 then do Console.WriteLine("\nNetwork: error = {0}",trainingError)
-        Console.WriteLine("\n\nNETWORK: DONE TRAINING!");
+                trainingError <- MathHelper.collectiveError(errors)
+        Console.WriteLine("\n\nNETWORK: DONE TRAINING AFTER {0} ITERATIONS!",i);
 
     ///
     /// Propagates the network from back to front
